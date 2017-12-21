@@ -11,7 +11,7 @@
     "id": "2",
     "name": "Rajiv"
   },
-  "perdormanceA":[{"id":"x","name":"1"},{"id":"y","name":"0"},{"id":"z","name":"0"}],
+  "perdormanceA":[{"id":"x","name":"0"},{"id":"y","name":"1"},{"id":"z","name":"0"}],
   "perdormanceB":[{"id":"a","name":"0"},{"id":"b","name":"0"},{"id":"c","name":"0"}]
 },
 {

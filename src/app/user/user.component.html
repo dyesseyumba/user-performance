@@ -17,20 +17,14 @@
         <th>B</th>
         <th>C</th>
       </tr>
-      <tr>
-        <td><input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter user's name"></td>
-        <td><input type="radio" name="performanceA" value="x"></td>
-        <td><input type="radio" name="performanceA" value="y"></td>
-        <td><input type="radio" name="performanceA" value="z"></td>
-        <td><input type="checkbox" value="a"></td>
-        <td><input type="checkbox" value="b"></td>
-        <td><input type="checkbox" value="c"></td>
+      <tr *ngFor="let user of users$ | async">
+        <td><input type="text" class="form-control" [value]="user.user.name" placeholder="Enter user's name"></td>
+        <td><input type="radio" name="performanceA+{{user.user.name}}" value="x" [checked]="user.perdormanceA[0].name === '1'"></td>
+        <td><input type="radio" name="performanceA+{{user.user.name}}" value="y" [checked]="user.perdormanceA[1].name === '1'"></td>
+        <td><input type="radio" name="performanceA+{{user.user.name}}" value="z" [checked]="user.perdormanceA[2].name === '1'"></td>
+        <td><input type="checkbox" value="a" [checked]="user.perdormanceB[0].name === '1'"></td>
+        <td><input type="checkbox" value="b" [checked]="user.perdormanceB[1].name === '1'"></td>
+        <td><input type="checkbox" value="c" [checked]="user.perdormanceB[2].name === '1'"></td>
       </tr>
     </table>
   </div>
-
-  <ul>
-      <li *ngFor="let user of users$ | async">
-          {{ user.user.name }}
-      </li>
-  </ul>
