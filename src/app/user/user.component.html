@@ -28,3 +28,9 @@
       </tr>
     </table>
   </div>
+
+  <ul>
+      <li *ngFor="let user of users$ | async">
+          {{ user.user.name }}
+      </li>
+  </ul>
