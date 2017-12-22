@@ -14,13 +14,15 @@
       <td>
         <input type="text" class="form-control" [value]="user.user.name" #name placeholder="Enter user's name" (change)="onChange(name.value, 'name', i)">
       </td>
-      <td *ngFor="let a of performancesA$ | async; let j = index;">
-        <input type="radio" name="performanceA+{{user.user.name}}" value="x" #radio (change)="onChange(radio.value, 'radio', i, 0)"
+      <td *ngFor="let a of performancesA$ | async">
+        <input type="radio" name="performanceA+{{user.user.name}}" [value]="a.id"
+        #radio (change)="onChange(radio.value, 'radio', i)"
           [checked]="user.performancesA.includes(a.id)">
       </td>
 
-      <td *ngFor="let b of performancesB$ | async; let k = index;">
-        <input type="checkbox" value="{{b.id}}" [checked]="user.performancesB.includes(b.id)">
+      <td *ngFor="let b of performancesB$ | async;">
+        <input type="checkbox" [value]="b.id" [checked]="user.performancesB.includes(b.id)"
+        #checkbox (change)="onChange(checkbox, 'checkbox', i)">
       </td>
     </tr>
   </table>
