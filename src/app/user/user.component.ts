@@ -5,7 +5,7 @@ import {User} from '../user';
 import {UserActions} from './user-actions';
 import {select} from '@angular-redux/store';
 
-@Component({selector: 'app-user', templateUrl: './user.component.html', styleUrls: ['./user.component.css']})
+@Component({selector: 'app-user', templateUrl: './user.component.html'})
 export class UserComponent implements OnInit {
 
   u: User[];
@@ -24,9 +24,7 @@ export class UserComponent implements OnInit {
   }
 
   onSave = () => {
-    this
-      .actions
-      .saveUsers([]);
+    this.actions.saveUsers(this.u);
   }
 
   onChange(value, type: string, index: number, index2: number) {

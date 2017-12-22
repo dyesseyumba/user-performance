@@ -48,7 +48,8 @@ export class UserActions {
     payload,
   })
 
-  saveUsers = (payload: User[]): UserAction => ({
+  @dispatch()
+  saveUsers = (payload): UserAction => ({
     type: UserActions.SAVE_USERS,
     meta: {},
     payload,
