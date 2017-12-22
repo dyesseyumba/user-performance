@@ -2,7 +2,15 @@ import { UserAction, UserActions } from './user-actions';
 import { User } from './../user';
 import { Action, Reducer } from 'redux';
 
-  export function userReducer(state: User[] = [], a: Action): User[] {
+/**
+ * The redux's user reducer
+ *
+ * @export
+ * @param {User[]} [state=[]]
+ * @param {Action} a
+ * @returns {User[]} The updated state
+ */
+export function userReducer(state: User[] = [], a: Action): User[] {
 
     const action = a as UserAction;
 

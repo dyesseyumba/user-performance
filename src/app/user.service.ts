@@ -1,7 +1,7 @@
 import {Observable} from 'rxjs/Observable';
 import {Injectable, ViewContainerRef} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {User} from './user';
+import {User, Performance} from './user';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
@@ -17,9 +17,20 @@ export class UserService {
    * @returns {Observable < User[] >}
    * @memberof UserService
    */
-  public gethUsers(): Observable < User[] > {
+  public getUsers(): Observable < User[] > {
     return this.http.get< User[] > ('../assets/user.json')
     .pipe(catchError((this.handleError('couldn\'t load initial users', []))));
+  }
+
+/**
+ * Get all performances form the server (here as json file)
+ *
+ * @returns {Observable < UsPerformance[] >}
+ * @memberof UserService
+ */
+public getPerformances(): Observable < Performance[] > {
+    return this.http.get< Performance[] > ('../assets/performance.json')
+    .pipe(catchError((this.handleError('couldn\'t load initial performances', []))));
   }
 
 
