@@ -7,7 +7,7 @@ export class RootEpics {
 
   public createEpics() {
     return [
-      this.userEpics.createEpic(),
+      ...this.userEpics.createEpic(),
     ];
   }
 }

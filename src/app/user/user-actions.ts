@@ -13,6 +13,9 @@ export class UserActions {
   static readonly LOAD_USERS_SUCCEEDED = 'LOAD_USERS_SUCCEEDED';
   static readonly LOAD_USERS_FAILED = 'LOAD_USERS_FAILED';
 
+  static readonly SAVE_USERS = 'SAVE_USERS';
+  static readonly SAVE_USERS_SUCCEEDED = 'SAVE_USERS_SUCCEEDED';
+
   @dispatch()
   loadUsers = (): UserAction => ({
     type: UserActions.LOAD_USERS,
@@ -37,5 +40,17 @@ export class UserActions {
     meta: { },
     payload: null,
     error,
+  })
+
+  saveSucceeded = (payload): UserAction => ({
+    type: UserActions.SAVE_USERS_SUCCEEDED,
+    meta: {},
+    payload,
+  })
+
+  saveUsers = (payload: User[]): UserAction => ({
+    type: UserActions.SAVE_USERS,
+    meta: {},
+    payload,
   })
 }

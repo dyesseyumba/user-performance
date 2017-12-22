@@ -9,5 +9,5 @@ export interface User {
 
 export interface Performance {
   id: string;
-  name: 1;
+  name: string;
 }

@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { UserService } from './../user.service';
 import { ApplicationState } from './../data/applicationState';
 import { Injectable } from '@angular/core';
@@ -10,8 +11,14 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 import { UserActions, UserAction } from './user-actions';
+import { User } from '../user';
 
-
+/**
+ * The User rx-observable's epic
+ *
+ * @export
+ * @class UserEpic
+ */
 @Injectable()
 export class UserEpic {
   constructor(
@@ -20,12 +27,11 @@ export class UserEpic {
   ) {}
 
   public createEpic() {
-    return createEpicMiddleware(this.createLoadAnimalEpic());
+    return [ createEpicMiddleware(this.createLoadUserEpic()),
+     createEpicMiddleware(this.createSaveUserEpic()) ];
   }
 
-
-
-  private createLoadAnimalEpic() {
+  private createLoadUserEpic(): Epic<UserAction, ApplicationState> {
     return (action$) => action$
       .filter(action => action.type === UserActions.LOAD_USERS)
       .switchMap(
@@ -34,7 +40,12 @@ export class UserEpic {
         .catch(response => of(this.actions.loadFailed({
           status: '' + response.status,
         })))
-        .startWith(this.actions.loadStarted());
+        .startWith(this.actions.loadStarted()));
+  }
 
+  private createSaveUserEpic(): Epic<UserAction, ApplicationState> {
+    return (action$) => action$
+      .filter(action => action.type === UserActions.SAVE_USERS)
+      .map(data => this.actions.saveSucceeded(data));
   }
 }

@@ -12,6 +12,9 @@ import { Action, Reducer } from 'redux';
 
       case UserActions.LOAD_USERS_FAILED:
       return state;
+
+      case UserActions.SAVE_USERS_SUCCEEDED:
+        return action.payload;
     }
 
     return state;
