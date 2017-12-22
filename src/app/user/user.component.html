@@ -1,0 +1,52 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>User</th>
+      <th colspan="3">Performance type A</th>
+      <th colspan="3">Performance type B</th>
+    </tr>
+    <tr>
+      <th>User</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>Z</th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+    <tr *ngFor="let user of users$ | async; let i = index;">
+      <td>
+        <input type="text" class="form-control" [value]="user.user.name" #name
+        placeholder="Enter user's name" (change)="onChange(name.value, 'name', i)">
+      </td>
+      <td>
+        <input type="radio" name="performanceA+{{user.user.name}}" value="x"
+         #radio (change)="onChange(radio.value, 'radio', i, 0)"
+        [checked]="user.perdormanceA[0].name === '1'">
+      </td>
+      <td>
+        <input type="radio" name="performanceA+{{user.user.name}}" value="y"
+        #radio2 (change)="onChange(radio2.value, 'radio', i, 1)"
+         [checked]="user.perdormanceA[1].name === '1'">
+      </td>
+      <td>
+        <input type="radio" name="performanceA+{{user.user.name}}" value="z"
+        #radio3 (change)="onChange(radio3.value, 'radio', i, 2)"
+         [checked]="user.perdormanceA[2].name === '1'">
+      </td>
+      <td>
+        <input type="checkbox" value="a" [checked]="user.perdormanceB[0].name === '1'"
+        #checkbox (change)="onChange(checkbox.checked, 'checkbox', i, 0)">
+      </td>
+      <td>
+        <input type="checkbox" value="b" [checked]="user.perdormanceB[1].name === '1'"
+        #checkbox2 (change)="onChange(checkbox2.checked, 'checkbox', i, 1)">
+      </td>
+      <td>
+        <input type="checkbox" value="c" [checked]="user.perdormanceB[2].name === '1'"
+        #checkbox3 (change)="onChange(checkbox3.checked, 'checkbox', i, 2)">
+      </td>
+    </tr>
+  </table>
+  <button type="button" class="btn btn-primary btn-lg" (click)="onSave()">Save</button>
+</div>
