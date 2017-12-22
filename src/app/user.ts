@@ -3,11 +3,16 @@ export interface User {
     id: string,
     name: string
   };
-  perdormanceA: Performance[];
-  perdormanceB: Performance[];
+  performancesA: string[];
+  performancesB: string[];
+}
+
+export interface P {
+  id: string;
+  name: string;
 }
 
 export interface Performance {
-  id: string;
-  name: string;
+  performancesA: P[];
+  performancesB: P[];
 }

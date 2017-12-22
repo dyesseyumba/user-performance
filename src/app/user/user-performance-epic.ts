@@ -1,5 +1,6 @@
-import { map } from 'rxjs/operators';
+import { PerformanceActions, PerformanceAction } from './user-performance-actions';
 import { UserService } from './../user.service';
+import { map } from 'rxjs/operators';
 import { ApplicationState } from './../data/applicationState';
 import { Injectable } from '@angular/core';
 import { Epic, createEpicMiddleware } from 'redux-observable';
@@ -10,33 +11,31 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
-import { UserActions, UserAction } from './user-actions';
-import { User } from '../user';
+import { Performance } from '../user';
 
 /**
- * The User rx-observable's epic
+ * The Performance rx-observable's epic
  *
  * @export
- * @class UserEpic
+ * @class PerformanceEpic
  */
 @Injectable()
-export class UserEpic {
-  constructor(private service: UserService, private actions: UserActions) {}
+export class PerformanceEpic {
+  constructor(private service: UserService, private actions: PerformanceActions) {}
 
   public createEpic() {
     return [
-      createEpicMiddleware(this.createLoadUserEpic()),
-      createEpicMiddleware(this.createSaveUserEpic())
+      createEpicMiddleware(this.createLoadPerformanceEpic())
     ];
   }
 
-  private createLoadUserEpic(): Epic<UserAction, ApplicationState> {
+  private createLoadPerformanceEpic(): Epic<PerformanceAction, ApplicationState> {
     return action$ =>
       action$
-        .filter(action => action.type === UserActions.LOAD_USERS)
+        .filter(action => action.type === PerformanceActions.LOAD_PERFORMANCES)
         .switchMap(() =>
           this.service
-            .getUsers()
+            .getPerformances()
             .map(data => this.actions.loadSucceeded(data))
             .catch(response =>
               of(
@@ -47,12 +46,5 @@ export class UserEpic {
             )
             .startWith(this.actions.loadStarted())
         );
-  }
-
-  private createSaveUserEpic(): Epic<UserAction, ApplicationState> {
-    return action$ =>
-      action$
-        .ofType(UserActions.SAVE_USERS)
-        .map(data => this.actions.saveSucceeded(data.payload));
   }
 }
